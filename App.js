@@ -10,118 +10,94 @@ import { createStackNavigator, createDrawerNavigator,
   createBottomTabNavigator, createTabNavigator } from 'react-navigation';
 
 
-  const Tabs = createBottomTabNavigator({
+
+  const Stack = createStackNavigator({
+    Home: {
+      screen: ListDecks,
+      navigationOptions: {
+        title: 'Home'
+      }
+    },
     ListDecks: {
       screen: ListDecks,
       navigationOptions: {
-        tabBarLabel: 'ListDecks',
-      },
+        title: 'ListDecks',
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: 'blue'
+        }
+      }
     },
+    IndividualDeck: {
+      screen: IndividualDeck,
+      navigationOptions: {
+        title: 'IndividualDeck',
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: 'blue'
+        }
+      }
+    }, 
     NewDeck: {
-      screen: NewDeck
+      screen: NewDeck,
+      navigationOptions: {
+        title: 'NewDeck',
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: 'blue'
+        }
+      }
+    }, 
+    NewQuestion: {
+      screen: NewQuestion,
+      navigationOptions: {
+        title: 'NewQuestion',
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: 'blue'
+        }
+      }
+    },
+    QuizView: {
+      screen: QuizView,
+      navigationOptions: {
+        title: 'QuizView',
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: 'blue'
+        }
+      }
     }
   });
 
-  const MainNavigator = createStackNavigator({
-    Home: {
-      screen: Tabs
-    },
-    NewDeck: {
-      screen: NewDeck,
-    }
-  })
+  function Home123 ({ navigation }){
+    return (
+      <View>
+        {console.log('Home View')}
+        <Text>HOME</Text>
+        <Text>asdfasdf988987</Text>
+        <Text onPress={() => navigation.navigate('Dashboard', { entryId: 'test123' })}>To Dashboard</Text>
+      </View>
+    )
+  }
+
+  function Dashboard ({ navigation }){
+    return (
+      <View>
+        <Text>Dashboards</Text>
+        <Text onPress={() => navigation.navigate('Home')}>To Home</Text>
+        <Text onPress={() => navigation.navigate('ListDecks')}>To ListDecks</Text>
+        <Text onPress={() => navigation.navigate('IndividualDeck',{id: 'React'})}>To IndividualDeck</Text>
+      </View>
+    )
+  }
 
 export default class App extends React.Component {
-  state= {
-    decks: {},
-    loading: true
-  }
-  
-  componentDidMount(){
-    getDecks().then(result => {
-      if(result === null || result === '{}'){ //if empty, add temp decks
-        addDeck({key: decks['React'].title, entry: decks['React']})
-        .then(() => {
-          return addDeck({key: decks['JavaScript'].title, entry: decks['JavaScript']});
-        })
-        .then(() => { //add both decks
-          return getDecks();
-        })
-        .then(result => { //get new decks, add to state
-          const data = JSON.parse(result);
-          this.setState({decks: data});
-        });
-      } else { //if decks exist
-        const data = JSON.parse(result);
-        this.setState({decks: data, loading: false});
-      }
-    });
-  }
-
   render() {
-    const { loading } = this.state;
-
     return (
-      <View style={styles.container}>
-        <ListDecks />
-
-        {/*<ListDecks decks={this.state.decks} />*/}
-        
-        {/** UNCOMMENT TO SEE ONE DECK**/}
-        {/* 
-          loading 
-          ? <Text>Loading</Text>
-          : <IndividualDeck deck={this.state.decks['JavaScript']} />
-        */}
-
-        {/** UNCOMMENT TO SEE QUIZ**/}
-        {/*
-          loading 
-          ? <Text>Loading</Text>
-          : <QuizView deck={this.state.decks['React']} />
-        */}
-        
-        {/** UNCOMMENT TO ADD NEW DECK**/}
-        {/*<NewDeck />*/}
-
-        {/** UNCOMMENT TO ADD QUESTION TO A DECK**/}
-        {/*<NewQuestion deckId={decks['React'].title} />*/}
-
+      <View style={{flex: 1, backgroundColor: 'red'}}>
+        <Stack />
       </View>
     );
   }
 }
-
-const decks = {
-  React: {
-    title: 'React',
-    questions: [
-      {
-        question: 'What is React?',
-        answer: 'A library for managing user interfaces'
-      },
-      {
-        question: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event'
-      }
-    ]
-  },
-  JavaScript: {
-    title: 'JavaScript',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
-  }
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

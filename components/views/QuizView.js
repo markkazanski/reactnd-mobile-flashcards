@@ -12,7 +12,10 @@ class QuizView extends React.Component {
     }
 
     componentDidMount(){
-        this.setState({total: this.props.deck.questions.length, loading: false});
+        //this.props.deck.questions.length
+        const { navigation } = this.props;
+        //console.log("QUiz Navigation", navigation.state.params.deck)
+        this.setState({total: navigation.state.params.deck.questions.length, loading: false});
     }
 
     toggleAnswer = () => {
@@ -37,11 +40,13 @@ class QuizView extends React.Component {
     }
 
     toHome = () => {
-
+        const { navigation } = this.props;
+        navigation.navigate('Home');
     }
 
     render(){
-        const { questions, title } = this.props.deck;
+        const { navigation } = this.props;
+        const { questions, title } = navigation.state.params.deck;
         const { showAnswer, qNum, total, correct, loading } = this.state;
         
         if(loading) return <Text>Loading</Text>

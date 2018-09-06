@@ -24,6 +24,8 @@ class NewDeck extends React.Component {
         this.setState({newDeck: ''});
 
         //navigate home
+        const { navigation } = this.props;
+        navigation.navigate('Home', {key: 'somevalue'})
     }
 
     onChangeText = (newDeck) => {
@@ -33,7 +35,6 @@ class NewDeck extends React.Component {
     } 
 
     render(){
-        console.log("new deck props", this.props)
         return (
             <View>
                 <Text>NEW DECK</Text>

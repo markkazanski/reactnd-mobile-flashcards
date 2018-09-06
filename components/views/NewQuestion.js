@@ -13,7 +13,7 @@ class NewQuestion extends React.Component {
 
     componentDidMount(){
         this.setState({
-            deckId: this.props.deckId,
+            deckId: this.props.navigation.state.params.id,
             loading: false
         })
     }
@@ -44,6 +44,8 @@ class NewQuestion extends React.Component {
         this.setState({answer: null, question: null});
 
         //navigate home
+        const { navigation } = this.props;
+        navigation.navigate('Home', {key: 'testvalue'});
     }
 
     render(){
