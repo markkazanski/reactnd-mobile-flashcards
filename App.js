@@ -49,7 +49,16 @@ export default class App extends React.Component {
           ? <Text>Loading</Text>
           : <IndividualDeck deck={this.state.decks['JavaScript']} />
         */}
-        <QuizView deck={decks['React']} />
+
+        {/*
+          loading 
+          ? <Text>Loading</Text>
+          : <QuizView deck={this.state.decks['React']} />
+        */}
+        
+        {/*<NewDeck />*/}
+        <NewQuestion deckId={decks['React'].title} />
+
       </View>
     );
   }

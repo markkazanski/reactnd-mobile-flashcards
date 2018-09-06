@@ -7,11 +7,12 @@ class QuizView extends React.Component {
         showAnswer: false,
         qNum: 0,
         total: null,
-        correct: 0
+        correct: 0, 
+        loading: true
     }
 
     componentDidMount(){
-        this.setState({total: this.props.deck.questions.length});
+        this.setState({total: this.props.deck.questions.length, loading: false});
     }
 
     toggleAnswer = () => {
@@ -41,7 +42,10 @@ class QuizView extends React.Component {
 
     render(){
         const { questions, title } = this.props.deck;
-        const { showAnswer, qNum, total, correct } = this.state;
+        const { showAnswer, qNum, total, correct, loading } = this.state;
+        
+        if(loading) return <Text>Loading</Text>
+
         if(!total){
             return <Text>No Questions</Text>
         }
@@ -50,7 +54,7 @@ class QuizView extends React.Component {
             return (
                 <View>
                     <Text>Quiz Complete</Text>
-                    <Text>Answered Correctly: {((correct / total) * 100).toFixed(2)}</Text>
+                    <Text>Answered Correctly: {((correct / total) * 100).toFixed(2)}%</Text>
                     <TextButton style={{margin: 20, color: 'blue'}} onPress={this.toHome}>
                         Home
                     </TextButton>
