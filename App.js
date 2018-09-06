@@ -6,17 +6,38 @@ import QuizView from './components/views/QuizView';
 import NewDeck from './components/views/NewDeck';
 import NewQuestion from './components/views/NewQuestion'
 import { getDecks, addDeck, getAllKeys, removeDeck } from './utils/api';
+import { createStackNavigator, createDrawerNavigator,
+  createBottomTabNavigator, createTabNavigator } from 'react-navigation';
+
+
+  const Tabs = createBottomTabNavigator({
+    ListDecks: {
+      screen: ListDecks,
+      navigationOptions: {
+        tabBarLabel: 'ListDecks',
+      },
+    },
+    NewDeck: {
+      screen: NewDeck
+    }
+  });
+
+  const MainNavigator = createStackNavigator({
+    Home: {
+      screen: Tabs
+    },
+    NewDeck: {
+      screen: NewDeck,
+    }
+  })
 
 export default class App extends React.Component {
   state= {
     decks: {},
     loading: true
   }
-
+  
   componentDidMount(){
-
-    //removeDeck('React');
-
     getDecks().then(result => {
       if(result === null || result === '{}'){ //if empty, add temp decks
         addDeck({key: decks['React'].title, entry: decks['React']})
@@ -30,8 +51,6 @@ export default class App extends React.Component {
           const data = JSON.parse(result);
           this.setState({decks: data});
         });
-        
-
       } else { //if decks exist
         const data = JSON.parse(result);
         this.setState({decks: data, loading: false});
@@ -41,8 +60,10 @@ export default class App extends React.Component {
 
   render() {
     const { loading } = this.state;
+
     return (
       <View style={styles.container}>
+        <ListDecks />
         {/*<ListDecks decks={this.state.decks} />*/}
         {/*
           loading 
@@ -57,7 +78,7 @@ export default class App extends React.Component {
         */}
         
         {/*<NewDeck />*/}
-        <NewQuestion deckId={decks['React'].title} />
+        {/*<NewQuestion deckId={decks['React'].title} />*/}
 
       </View>
     );

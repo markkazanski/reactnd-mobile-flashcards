@@ -33,6 +33,7 @@ class NewDeck extends React.Component {
     } 
 
     render(){
+        console.log("new deck props", this.props)
         return (
             <View>
                 <Text>NEW DECK</Text>
