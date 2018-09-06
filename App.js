@@ -21,7 +21,7 @@ import { createStackNavigator, createDrawerNavigator,
     ListDecks: {
       screen: ListDecks,
       navigationOptions: {
-        title: 'ListDecks',
+        title: 'Deck List',
         headerTintColor: 'white',
         headerStyle: {
           backgroundColor: 'blue'
@@ -31,7 +31,7 @@ import { createStackNavigator, createDrawerNavigator,
     IndividualDeck: {
       screen: IndividualDeck,
       navigationOptions: {
-        title: 'IndividualDeck',
+        title: 'Deck Details',
         headerTintColor: 'white',
         headerStyle: {
           backgroundColor: 'blue'
@@ -41,7 +41,7 @@ import { createStackNavigator, createDrawerNavigator,
     NewDeck: {
       screen: NewDeck,
       navigationOptions: {
-        title: 'NewDeck',
+        title: 'New Deck',
         headerTintColor: 'white',
         headerStyle: {
           backgroundColor: 'blue'
@@ -51,7 +51,7 @@ import { createStackNavigator, createDrawerNavigator,
     NewQuestion: {
       screen: NewQuestion,
       navigationOptions: {
-        title: 'NewQuestion',
+        title: 'New Question',
         headerTintColor: 'white',
         headerStyle: {
           backgroundColor: 'blue'
@@ -61,7 +61,7 @@ import { createStackNavigator, createDrawerNavigator,
     QuizView: {
       screen: QuizView,
       navigationOptions: {
-        title: 'QuizView',
+        title: 'Quiz',
         headerTintColor: 'white',
         headerStyle: {
           backgroundColor: 'blue'
@@ -69,28 +69,6 @@ import { createStackNavigator, createDrawerNavigator,
       }
     }
   });
-
-  function Home123 ({ navigation }){
-    return (
-      <View>
-        {console.log('Home View')}
-        <Text>HOME</Text>
-        <Text>asdfasdf988987</Text>
-        <Text onPress={() => navigation.navigate('Dashboard', { entryId: 'test123' })}>To Dashboard</Text>
-      </View>
-    )
-  }
-
-  function Dashboard ({ navigation }){
-    return (
-      <View>
-        <Text>Dashboards</Text>
-        <Text onPress={() => navigation.navigate('Home')}>To Home</Text>
-        <Text onPress={() => navigation.navigate('ListDecks')}>To ListDecks</Text>
-        <Text onPress={() => navigation.navigate('IndividualDeck',{id: 'React'})}>To IndividualDeck</Text>
-      </View>
-    )
-  }
 
 export default class App extends React.Component {
   render() {

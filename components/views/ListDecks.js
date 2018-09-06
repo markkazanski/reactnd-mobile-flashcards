@@ -49,7 +49,7 @@ class ListDecks extends React.Component {
 
         return (
             <ScrollView style={{flex: 1}}>
-                <Text>ListDecks</Text>
+                <Text>Your Decks</Text>
                 {Object.keys(decks).map(deck => {
                     return <Deck key={deck} {...decks[deck]} />
                 })}
