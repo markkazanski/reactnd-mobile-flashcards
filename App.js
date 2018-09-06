@@ -64,20 +64,27 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <ListDecks />
+
         {/*<ListDecks decks={this.state.decks} />*/}
-        {/*
+        
+        {/** UNCOMMENT TO SEE ONE DECK**/}
+        {/* 
           loading 
           ? <Text>Loading</Text>
           : <IndividualDeck deck={this.state.decks['JavaScript']} />
         */}
 
+        {/** UNCOMMENT TO SEE QUIZ**/}
         {/*
           loading 
           ? <Text>Loading</Text>
           : <QuizView deck={this.state.decks['React']} />
         */}
         
+        {/** UNCOMMENT TO ADD NEW DECK**/}
         {/*<NewDeck />*/}
+
+        {/** UNCOMMENT TO ADD QUESTION TO A DECK**/}
         {/*<NewQuestion deckId={decks['React'].title} />*/}
 
       </View>
